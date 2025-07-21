@@ -10,6 +10,7 @@
       text-align: center;
       background-color: rgb(173 215 255 / 50%);
     }
+    
     iframe {
       width: 100%;
       height: 500px;
@@ -27,10 +28,24 @@
   </style>
 </head>
 <body>
-  <h2>🎬 Movie Viewer</h2>
-  <label for="imdbId">Enter IMDb ID: </label> <br><br> <input type="text" id="imdbId" placeholder="tt0111161" required/>
-  
-  <br><br><em>Note: If one source buffers or doesn't work, use another. TV Series IMDb ID will not work.</em><br><br>
+  <h2>🎬 Movie & TV Series Viewer</h2>
+
+  <div>
+    <label><input type="radio" name="type" value="movie" checked>Movie</label>
+    <label><input type="radio" name="type" value="series">Series</label>
+  </div>
+
+  <br>
+
+  <div class="choices">
+    <label for="imdbId">Enter IMDb ID: </label> <br><br> <input type="text" id="imdbId" placeholder="tt0111161" required/>
+  </div>
+
+  <div id="tvInputs" style="display: none; margin-top: 10px;">
+    <label for="season">Season:</label> <input type="number" id="season" min="1" placeholder="1"> <label for="episode">Episode:</label> <input type="number" id="episode" min="1" max="999" placeholder="1">
+  </div>
+
+  <br><br><em>Note: If one source buffers or doesn't work, use another.</em><br><br>
 
   <div class="options">
     <p>Select a source to view:</p>
@@ -40,10 +55,12 @@
     <label><input type="radio" name="site" value="source-4"> Source 4</label>
     <label><input type="radio" name="site" value="source-5"> Source 5</label>
   </div>
-  <br>
-  <button onclick="loadIframe()">Load source</button>
 
-  <iframe id="previewFrame" src="" allowfullscreen></iframe>
+  <br>
+
+  <button onclick="loadIframe()">Load source</button> <!--Onclick Function goes to <script> tag javascript logic-->
+
+  <iframe id="previewFrame" src="" allowfullscreen></iframe> <!--Player section-->
 
   <br><br>
 
@@ -51,34 +68,74 @@
     and media is fetched through non-affiliated third party domains.</em>
 
   <script>
+    //Visibility for TV Series Input box
+    document.querySelectorAll('input[name="type"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        const tvSection = document.getElementById('tvInputs');
+        tvSection.style.display = radio.value === 'series' ? 'block' : 'none';
+      });
+    });
+    
     function loadIframe() {
+      const type = document.querySelector('input[name="type"]:checked').value;
       const imdbId = document.getElementById('imdbId').value.trim();
       const selectedSite = document.querySelector('input[name="site"]:checked').value;
-      let url = '';
 
-      if (!imdbId) {
+      if(!imdbId) {
         alert('Please enter a valid IMDb ID.');
         return;
       }
 
-      switch (selectedSite) {
-        case 'source-1':
-          url = `https://vidfast.pro/movie/${imdbId}`;
-          break;
-        case 'source-2':
-          url = `https://vidapi.xyz/embed/movie/${imdbId}`;
-          break;
-        case 'source-3':
-          url = `https://vidsrc.me/embed/movie?imdb=${imdbId}`;
-          break;
-        case 'source-4':
-          url = `https://vidsrc.cc/v2/embed/movie/${imdbId}`;
-          break;
-        case 'source-5':
-          url = `https://2embed.cc/embed/${imdbId}`;
-          break;
-      }
+      let url = '';
+      
+      if(type === 'movie'){
+        switch (selectedSite) {
+          case 'source-1':
+            url = `https://vidfast.pro/movie/${imdbId}`;
+            break;
+          case 'source-2':
+            url = `https://vidapi.xyz/embed/movie/${imdbId}`;
+            break;
+          case 'source-3':
+            url = `https://vidsrc.me/embed/movie?imdb=${imdbId}`;
+            break;
+          case 'source-4':
+            url = `https://vidsrc.cc/v2/embed/movie/${imdbId}`;
+            break;
+          case 'source-5':
+            url = `https://2embed.cc/embed/${imdbId}`;
+            break;
+          default:
+            return alert('Unknown source for movies.');
+        } 
+      } else {
+          const s = document.getElementById('season').value;
+          const e = document.getElementById('episode').value;
 
+          if (!season || !episode) {
+            return alert('Please enter both season and episode.');
+          }
+
+          switch (selectedSite) {
+            case 'source-1':
+              url = `https://vidfast.pro/tv/${imdbId}/${s}/${e}`;
+              break;
+            case 'source-2':
+              url = `https://vidapi.xyz/embed/tv/${imdbId}&s=${s}&e=${e}`;
+              break;
+            case 'source-3':
+              url = `https://vidsrc.me/embed/tv?imdb=${imdbId}&season=${s}&episode=${e}&ds_lang=en`;
+              break;
+            case 'source-4':
+              url = `https://vidsrc.cc/v2/embed/tv/${imdbId}/${s}/${e}`;
+              break;
+            case 'source-5':
+              url = `https://2embed.cc/embedtv/${imdbId}&s=${s}&e=${e}`;
+              break;
+            default:
+              return alert('Unknown source for series.');
+          }
+        }
       document.getElementById('previewFrame').src = url;
     }
   </script>
