@@ -12,8 +12,7 @@
     }
     
     iframe {
-      width: 100%;
-      height: 500px;
+      aspect-ratio: 21/9;
       border: 1px solid #ccc;
       margin-top: 20px;
     }
@@ -30,7 +29,7 @@
 <body>
   <h2>🎬 Movie & TV Series Viewer</h2>
 
-  <div>
+  <div class="mediaCategory">
     <label><input type="radio" name="type" value="movie" checked>Movie</label>
     <label><input type="radio" name="type" value="series">Series</label>
     <!--<label><input type="radio" name="type" value="anime">Anime</label>-->
@@ -61,15 +60,19 @@
 
   <button onclick="loadIframe()">Load source</button> <!--Onclick Function goes to <script> tag javascript logic-->
 
-  <div class="player">
-    <iframe id="previewFrame" src="" allowfullscreen></iframe> <!--Player section-->
+  <div class="player" style="position: relative; padding-bottom: 43%;> <!--Player section-->
+    <iframe id="previewFrame" src="" 
+      style="position: absolute; top: 0; left: 0; width: 100%;"
+      allowfullscreen></iframe> <!--Player section-->
   </div>
   
   <br><br>
 
-  <em>This website does not host/store any DMCA or protected content or any pirated files 
+  <div>
+    <em>This website does not host/store any DMCA or protected content or any pirated files 
     and media is fetched through non-affiliated third party domains.</em>
-
+  </div>
+  
   <script>
     //Visibility for TV Series Input box
     document.querySelectorAll('input[name="type"]').forEach(radio => {
