@@ -33,12 +33,13 @@
   <div>
     <label><input type="radio" name="type" value="movie" checked>Movie</label>
     <label><input type="radio" name="type" value="series">Series</label>
+    <!--<label><input type="radio" name="type" value="anime">Anime</label>-->
   </div>
 
   <br>
 
   <div class="choices">
-    <label for="imdbId">Enter IMDb ID: </label> <br><br> <input type="text" id="imdbId" placeholder="tt0111161" required/>
+    <label for="imdbId">Enter IMDB/TMDB ID: </label> <br><br> <input type="text" id="imdbId" placeholder="tt0111161" required/>
   </div>
 
   <div id="tvInputs" style="display: none; margin-top: 10px;">
@@ -60,8 +61,10 @@
 
   <button onclick="loadIframe()">Load source</button> <!--Onclick Function goes to <script> tag javascript logic-->
 
-  <iframe id="previewFrame" src="" allowfullscreen></iframe> <!--Player section-->
-
+  <div class="player">
+    <iframe id="previewFrame" src="" allowfullscreen></iframe> <!--Player section-->
+  </div>
+  
   <br><br>
 
   <em>This website does not host/store any DMCA or protected content or any pirated files 
@@ -94,16 +97,16 @@
             url = `https://vidfast.pro/movie/${imdbId}`;
             break;
           case 'source-2':
-            url = `https://vidapi.xyz/embed/movie/${imdbId}`;
+            url = `https://vidlink.pro/movie/${imdbId}`;
             break;
           case 'source-3':
-            url = `https://vidsrc.me/embed/movie?imdb=${imdbId}`;
+            url = `https://vidora.su/movie/${imdbId}`;
             break;
           case 'source-4':
             url = `https://vidsrc.cc/v2/embed/movie/${imdbId}`;
             break;
           case 'source-5':
-            url = `https://2embed.cc/embed/${imdbId}`;
+            url = `https://vidsrc.icu/embed/movie/${imdbId}`;
             break;
           default:
             return alert('Unknown source for movies.');
@@ -121,16 +124,16 @@
               url = `https://vidfast.pro/tv/${imdbId}/${s}/${e}`;
               break;
             case 'source-2':
-              url = `https://vidapi.xyz/embed/tv/${imdbId}&s=${s}&e=${e}`;
+              url = `https://vidsrc.icu/embedtv/${imdbId}/${s}/${e}`;
               break;
             case 'source-3':
-              url = `https://vidsrc.me/embed/tv?imdb=${imdbId}&season=${s}&episode=${e}&ds_lang=en`;
+              url = `https://vidora.su/tv/${imdbId}/${s}/${e}?colour=6e2525`;
               break;
             case 'source-4':
               url = `https://vidsrc.cc/v2/embed/tv/${imdbId}/${s}/${e}`;
               break;
             case 'source-5':
-              url = `https://2embed.cc/embedtv/${imdbId}&s=${s}&e=${e}`;
+              url = `https://vidapi.xyz/embed/tv/${imdbId}&s=${s}&e=${e}`;
               break;
             default:
               return alert('Unknown source for series.');
