@@ -23,10 +23,6 @@
       font-size: 35px;
     }
 
-    div.choices,div.tvInputs{
-      font-size: 35px;
-    }
-
     input[type="text"]{
       width: 190px;
       padding: 4px;
@@ -53,6 +49,12 @@
 
     label,p,em{
       font-size: 18px;
+    }
+
+    @media only screen and (max-width: 768px) {
+      label,input,p{
+        font-size: 30px;
+      }
     }
 
     button{
@@ -91,7 +93,8 @@
   </div>
 
   <div id="tvInputs" style="display: none; margin-top: 10px;">
-    <label for="season">Season:</label>&nbsp;<input type="number" id="season" min="1" placeholder="1" required> <label for="episode">Episode:</label>&nbsp;<input type="number" id="episode" min="1" max="999" placeholder="1" required>
+    <label for="season" style="vertical-align: middle;">Season:</label>&nbsp;<input type="number" id="season" min="1" placeholder="1" style="vertical-align: middle;" required>
+    <label for="episode" style="vertical-align: middle;">Episode:</label>&nbsp;<input type="number" id="episode" min="1" max="999" placeholder="1" style="vertical-align: middle;" required>
   </div>
 
   <br><br>
