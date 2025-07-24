@@ -5,29 +5,72 @@
   <title>Watch Your Movie or Series</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
       padding: 20px;
       text-align: center;
-      background-color: rgb(173 215 255 / 50%);
+      background-color: #add8ff80;
     }
     
     iframe {
       aspect-ratio: 21/9;
       border: 1px solid #ccc;
       margin-top: 20px;
+      box-shadow: 0 0 0.5ex lightseagreen;
     }
 
     input {
       text-align: center;
     }
 
-    .options {
-      margin-top: 10px;
+    input[type="text"]{
+      width: 70px;
+      padding: 4px;
+      border: 4px solid #20b2aa;
+      border-radius: 4px;
+    }
+
+    input[type="text"]:focus{
+      box-shadow: 0 0 1.5ex #000000;
+      transition: box-shadow 0.3s ease-in-out;
+    }
+
+    input[type="number"]{
+      width: 45px;
+      padding: 4px;
+      border: 4px solid #20b2aa;
+      border-radius: 4px;
+    }
+
+    input[type="number"]:focus{
+      box-shadow: 0 0 1.5ex #000000;
+      transition: box-shadow 0.3s ease-in-out;
+    }
+
+    label,p,em{
+      font-size: 18px;
+    }
+
+    button{
+      border: 4px;
+      border-radius: 4px;
+      padding: 10px;
+      text-align: center;
+      background-color: #20b2aa;
+    }
+
+    button:hover{
+      color: #000000;
+      background-color: #ffffff;
+      cursor: pointer;
+      border: 4px solid #20b2aa;
+      transition: border 0.1s ease-in-out;
     }
   </style>
 </head>
 <body>
-  <h2>🎬 Movie & TV Series Viewer</h2>
+  <div class="header">
+    <h2>🎬 Movie & TV Series Viewer</h2>
+  </div>
 
   <div class="mediaCategory">
     <label><input type="radio" name="type" value="movie" checked>Movie</label>
@@ -42,26 +85,38 @@
   </div>
 
   <div id="tvInputs" style="display: none; margin-top: 10px;">
-    <label for="season">Season:</label> <input type="number" id="season" min="1" placeholder="1"> <label for="episode">Episode:</label> <input type="number" id="episode" min="1" max="999" placeholder="1">
+    <label for="season">Season:</label>&nbsp;<input type="number" id="season" min="1" placeholder="1" required> <label for="episode">Episode:</label>&nbsp;<input type="number" id="episode" min="1" max="999" placeholder="1" required>
   </div>
 
-  <br><br><em>Note: If one source buffers or doesn't work, use another.</em><br><br>
+  <br><br>
+  
+  <div class="note">
+    <em>Note: If one source buffers or doesn't work, use another. 
+      Ads are from player and not from the site. Use Ad-block or ad-blocking browser for less ads.</em>
+  </div>
+  
+  <br><br>
 
   <div class="options">
-    <p>Select a source to view:</p>
-    <label><input type="radio" name="site" value="source-1" checked> Source 1</label>
-    <label><input type="radio" name="site" value="source-2"> Source 2</label>
-    <label><input type="radio" name="site" value="source-3"> Source 3</label>
-    <label><input type="radio" name="site" value="source-4"> Source 4</label>
-    <label><input type="radio" name="site" value="source-5"> Source 5</label>
+    <p class="opText">Select a source to view:</p>
+    <label><input type="radio" name="site" value="source-1" checked>&nbsp;Source&nbsp;1</label>
+    <label><input type="radio" name="site" value="source-2">&nbsp;Source&nbsp;2</label>
+    <label><input type="radio" name="site" value="source-3">&nbsp;Source&nbsp;3</label>
+    <label><input type="radio" name="site" value="source-4">&nbsp;Source&nbsp;4</label>
+    <label><input type="radio" name="site" value="source-5">&nbsp;Source&nbsp;5</label>
   </div>
 
   <br>
 
   <button onclick="loadIframe()">Load source</button> <!--Onclick Function goes to <script> tag javascript logic-->
 
-  <div class="player" style="position: relative; padding-bottom: 43%;"> <!--Player section-->
-    <iframe id="previewFrame" src="" style="position: absolute; top: 0; left: 0; width: 100%;" allowfullscreen></iframe> <!--Player section-->
+  <br>
+
+  <div class="player" style="position: relative; padding-bottom: 43%; margin-top: 10px;"> <!--Player section-->
+    <iframe id="previewFrame" src="" 
+    style="position: absolute; top: 0; left: 0; width: 100%;" 
+    allowfullscreen>
+    </iframe>
   </div>
   
   <br><br>
