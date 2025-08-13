@@ -6,10 +6,15 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
   <style>
     body {
-      font-family: Verdana, Geneva, Tahoma, sans-serif;
-      padding: 30px;
+      font-family: Tahoma;
+      padding: 40px;
       text-align: center;
       background-color: #add8ff80;
+    }
+
+    h1{
+      font-size: 42px; 
+      font-weight: 700;
     }
     
     iframe {
@@ -19,9 +24,10 @@
       box-shadow: 0 0 1ex #20b2aa;
     }
 
-    input {
+    input, label {
       text-align: center;
       font-size: 35px;
+      cursor: pointer;
     }
 
     .info-container {
@@ -60,7 +66,7 @@
     }
 
     input[type="number"]{
-      width: 55px;
+      width: 100px;
       padding: 4px;
       border: 4px solid #20b2aa;
       border-radius: 5px;
@@ -71,13 +77,24 @@
       transition: box-shadow 0.3s ease-in-out;
     }
 
-    label,p,em{
-      font-size: 18px;
+    .note{
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 1ex #f08080;
     }
 
-    @media only screen and (max-width: 768px) {
+    label,p,em{
+      font-size: 32px;
+    }
+
+    @media screen and (max-width: 768px) {
+      body{
+        padding: 55px;
+      }
+      
       label,input,p{
         font-size: 30px;
+        font-weight: 300;
       }
     }
 
@@ -91,34 +108,43 @@
     }
 
     button:hover{
-      color: #000000;
-      background-color: #ffffff;
+      color: #000;
+      background-color: #fff;
       cursor: pointer;
       border: 4px solid #20b2aa;
-      transition: border 0.1s ease-in-out;
+      font-size: 38px;
+      box-shadow: 0 0 1ch #808080;
+      transition: all 0.1s ease-in-out;
+      z-index: 1;
     }
   </style>
 </head>
 <body>
   <div class="header">
-    <h2>🎬 Movie & TV Series Viewer</h2>
+    <h1>🎬 Movie & TV Series Viewer</h1>
   </div>
+
+  <br>
+  
+  <p style="font-family: Georgia;">
+    What would you like to watch today? <em>Select below</em>
+  </p>
 
   <div class="mediaCategory">
     <label><input type="radio" name="type" value="movie" checked> Movie</label>
-    <label><input type="radio" name="type" value="series"> Series</label>
+    <label style="padding-left: 25px;"><input type="radio" name="type" value="series"> Series</label>
     <!--<label><input type="radio" name="type" value="anime">Anime</label>-->
   </div>
 
   <br>
 
   <div class="choices">
-    <label for="imdbId">Enter IMDB/TMDB ID: </label> 
-    <br> <input autofocus type="text" id="imdbId" placeholder="tt0111161" required/>
+    <p>Enter IMDB/TMDB ID: </p>
+    <label><input autofocus type="text" name="imdbId" id="imdbId" placeholder="tt0111161" required/></label>
     <div class="info-container"><svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" 
       fill="currentColor" class="info-circle-fill" viewBox="0 0 16 16" 
       style="padding-left: 10px;
-      padding-bottom: 16px; 
+        padding-bottom: 16px; 
         position: relative; 
         border-color: #20b2aa;">
       <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2"/>
@@ -136,14 +162,14 @@ TMDB ID - <a href="https://themoviedb.org/" target="_blank">TMDB</a>
   </div>
 
   <div id="tvInputs" style="display: none; margin-top: 10px;">
-    <label for="season" style="vertical-align: middle;">Season:</label>&nbsp;<input type="number" id="season" min="1" placeholder="1" style="vertical-align: middle;" required>
-    <label for="episode" style="vertical-align: middle;">Episode:</label>&nbsp;<input type="number" id="episode" min="1" max="999" placeholder="1" style="vertical-align: middle;" required>
+    <p>Season: &nbsp;<label><input type="number" id="season" min="1" placeholder="1" style="vertical-align: middle;" required></label>
+    Episode: &nbsp;<label><input type="number" id="episode" min="1" max="999" placeholder="1" style="vertical-align: middle;" required></label></p>
   </div>
 
   <br><br>
   
   <div class="note">
-    <em>Note: If one source buffers or doesn't work, use another. 
+    <em style="font-family: Geneva;">Note: If one source buffers or doesn't work, use another. 
       Ads are from player and not from the site. Use Ad-block or ad-blocking browser for less ads.</em>
   </div>
   
@@ -152,10 +178,10 @@ TMDB ID - <a href="https://themoviedb.org/" target="_blank">TMDB</a>
   <div class="options">
     <p class="opText">Select a source to view:</p>
     <label><input type="radio" name="site" value="source-1" checked>&nbsp;Source&nbsp;1</label>
-    <label><input type="radio" name="site" value="source-2">&nbsp;Source&nbsp;2</label>
-    <label><input type="radio" name="site" value="source-3">&nbsp;Source&nbsp;3</label>
-    <label><input type="radio" name="site" value="source-4">&nbsp;Source&nbsp;4</label>
-    <label><input type="radio" name="site" value="source-5">&nbsp;Source&nbsp;5</label>
+    <label style="padding-left: 15px;"><input type="radio" name="site" value="source-2">&nbsp;Source&nbsp;2</label>
+    <label style="padding-left: 15px;"><input type="radio" name="site" value="source-3">&nbsp;Source&nbsp;3</label>
+    <label style="padding-left: 15px;"><input type="radio" name="site" value="source-4">&nbsp;Source&nbsp;4</label>
+    <label style="padding-left: 15px;"><input type="radio" name="site" value="source-5">&nbsp;Source&nbsp;5</label>
   </div>
 
   <br>
@@ -166,8 +192,8 @@ TMDB ID - <a href="https://themoviedb.org/" target="_blank">TMDB</a>
 
   <div class="player" id="player" style="position: relative; padding-bottom: 43%; margin-top: 10px;"> <!--Player section-->
     <iframe id="previewFrame" src="" 
-    style="position: absolute; top: 0; left: 0; width: 100%;" 
-    allowfullscreen>
+      style="position: absolute; top: 0; left: 0; width: 100%;" 
+      allowfullscreen>
     </iframe>
   </div>
   
@@ -267,6 +293,3 @@ TMDB ID - <a href="https://themoviedb.org/" target="_blank">TMDB</a>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </body>
 </html>
-
-
-
